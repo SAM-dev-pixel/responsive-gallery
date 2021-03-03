@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    img {
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      height: 100vh;
+      gap: 10px;
+    }
+    .img-container {
+      overflow: hidden;
+    }
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all .3s ease;
+    }
+    .img-container img:hover {
+      transform: scale(1.2);
+    }
+    .modal {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.8);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .15s ease-out;
+    }
+    .modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .full-img {
+      height: 70%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      transition: all .15s ease-out;
+    }
+    .full-img.open {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .modal p {
+      color: white;
+      font-size: 2rem;
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translate(-50%, -5%);
+    }
+    
+    </style>
+</head>
+
+<body>
+  
+  <div class="gallery">
+    <div class="img-container">
+      <img src="image10.jpeg" alt="pinky leaves" class="thumb">
+    </div>
+    <div class="img-container">
+      <img src="image11.jpeg" alt="spiderman verse" class="thumb">
+    </div>
+    <div class="img-container">
+      <img src="image12.jpeg" alt="coding" class="thumb">
+    </div>
+    <div class="img-container">
+      <img src="image9.jpeg" alt="moon" class="thumb">
+    </div>
+  </div>
+  
+  <div class="modal">
+    <img src="image10.jpeg" class="full-img" alt="">
+    <p class="caption">di dunia ini yang</p>
+  </div>
+
+  <script>
+  
+  const gallery = document.querySelector('.gallery');
+  const modal = document.querySelector('.modal');
+  const fullImage = document.querySelector('.full-img');
+  const caption = document.querySelector('.caption');
+  
+  gallery.addEventListener('click', (e) => {
+    if(e.target.classList.contains('thumb')) {
+      modal.classList.add('open');
+      fullImage.src = e.target.src;
+      fullImage.classList.add('open');
+      caption.textContent = e.target.alt;
+    } 
+  });
+  modal.addEventListener('click', () => {
+    modal.classList.remove('open');
+    fullImage.classList.remove('open');
+  })
+  
+  </script>
+
+</body>
+
+</html>
